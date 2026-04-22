@@ -1,0 +1,434 @@
+---
+title: "Avogadro Toast: Módulo 2"
+shorttitle: "Avogadro Toast"
+authors:
+- name: Pilar Mujica
+- name: Lucia Salamone
+- name: Rocio Martinez
+- name: Sara Kemelmajer
+- name: Caterina Dinnocenzo
+- name: Lucas Segura
+institutes:
+- name: Universidad Nacional de Cuyo, Mendoza CP 5502
+  email: ''
+  url: https://uncuyo.edu.ar
+abstract: |
+  Este módulo establece los primeros pasos de programación en R-Cran utilizando la plantilla LNCS de Springer.
+keywords:
+- Programming Language
+- R-Cran
+- R Markdown
+header-includes:
+- \usepackage{fvextra}
+- \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+output:
+  rticles::lncs_article:
+    citation_package: default
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE,
+  fig.align = "center",  # Centra todas las figuras automáticamente
+  out.width = "100%",    # Fuerza a que no excedan el ancho del margen
+  out.extra = "" )
+```
+
+# Primera sección: Aprender a usar R
+
+## Primeros comandos de R
+
+R es un lenguaje muy similiar a mathlab y permite el trabajo con matrices.
+
+```{r}
+a=38
+a=40
+b=60
+c=b-a
+c
+```
+
+```{r}
+y=40
+alpha<-30
+```
+
+## Uso de datasets o base de datos intenrnos de R
+
+Usando el comando data en la consola obtenemos distintos datos ya cargados en la base de datos de R, estos datos estan dados en tablas de las cuales podemos elegir columnas especificas si escribimos \$ despues de el comando de informacion especifico y elegimos la columna de datos deseada
+
+```{r cars}
+summary(cars)
+```
+
+## Comando Plot
+
+Es un comando que permite graficar cualquier fuente de datos que le asignemos, teniendo tambien la posibilidad de asignar nombre a las variables o hacer cambios en el grafico. En caso de duda de como utilizar el comndo podemos escribir ?plot en la consola, lo cual abrira una ventana que explicara en detalle el comando.
+
+```{r pressure, echo=FALSE}
+plot(pressure,type="s", main="Presion del gas ideal", ylab="hPa", xlab="K")
+```
+
+## Funciones estadisticas
+
+```{r}
+z1<-rnorm(350,22,5)
+z1  
+```
+
+```{r}
+plot(z1)
+w1<-length(z1)
+w1
+x1<-(501:850)
+x1
+plot(z1,x1)
+```
+
+```{r}
+hist(z1,main="Histograma de Edades",breaks=50)
+```
+
+```{r}
+plot(density(z1,type="d"))
+```
+
+# Segunda sección: Ejercicios en clase:
+
+## Ejercicio 1 de Algoritmos
+
+consigna: las ultimas 3 cifras del DNI son 195, consigna: crear una variable que tenga sus numeros
+
+```{r}
+DNI<-195
+```
+
+Consigna: Crear un vector que tenga todos los numeros enteros desde el 1 al 195.
+
+```{r}
+Secuencia_dni<-(1:195)
+Secuencia_dni
+```
+
+## Ejercicio 2: Calcular la suma de todos los valores del vector secuencia_dni
+
+```{r}
+Total<-0
+Valor_Final<-length(Secuencia_dni)
+for(i in 1:Valor_Final) {
+  Total<-Total+i
+  Total}
+
+```
+
+## Ejercicio 3
+
+Repetir el ejercicio anterior pero en Python
+
+```{python}
+secuencia_dni = range(1, 196)
+suma = sum(secuencia_dni)
+
+print(f"La suma total es: {suma}")
+```
+
+## Ejercicio 4
+
+¿Cuanto tarda en correr el codigo del ejercicio 2?
+
+```{r}
+Inicio<-Sys.time()
+Total<-0
+Valor_Final<-1000000*length(Secuencia_dni)
+for(i in 1:Valor_Final) {
+  Total<-Total+i
+  Total}
+
+Final<-Sys.time()
+Final-Inicio
+```
+
+## Ejercicio 5
+
+Repetir ejercicio anterior utilizando la cabeza de Gauss
+
+```{r}
+n <- 195
+suma_gauss <- (n * (n + 1)) / 2
+
+print("La suma usando la fórmula de Gauss es:")
+suma_gauss
+```
+
+# Tercera sección: Ejercicios del PDF:
+
+## 1.4 Generar un vector secuencia
+
+### Método 1: Uso de bucle 'for' (anidamiento clásico)
+
+```{r}
+tiempo_for <- system.time({
+  A <- numeric(50000) # Pre-asignar espacio es una buena práctica en R
+  for (i in 1:50000) { 
+    A[i] <- (i * 2) 
+  }
+})
+# Mostrar extremos del vector resultante
+print("Extremo Inicial (head):")
+print(head(A))
+print("Extremo Final (tail):")
+print(tail(A))
+
+```
+
+### Método 2: Uso del comando nativo de R 'seq'
+
+```{r}
+tiempo_seq <- system.time({
+  B <- seq(from = 2, to = 100000, by = 2)
+})
+# Mostrar extremos del vector resultante
+print("Extremo Inicial (head):")
+print(head(B))
+print("Extremo Final (tail):")
+print(tail(B))
+```
+
+### Comparativa de Performance
+
+```{r}
+print("Performance del bucle FOR:")
+print(tiempo_for)
+
+print("Performance del comando SEQ:")
+print(tiempo_seq)
+```
+
+## Ejercicio 1.5 e 1.6 Implementación de Fibonacci
+
+```{r}
+# Inicializamos el vector con los dos primeros términos
+fib <- c(0, 1)
+limite <- 1000000
+iteracion <- 2 # Ya tenemos los dos primeros elementos
+
+# Bucle para generar la serie hasta superar el millón
+while (fib[length(fib)] <= limite) {
+# El nuevo término es la suma de los dos anteriores
+  nuevo_termino <- fib[length(fib)] + fib[length(fib) - 1]
+  
+  fib <- c(fib, nuevo_termino)
+  
+  iteracion <- iteracion + 1
+  
+  cat("Iteración:", iteracion, " - Valor generado:", nuevo_termino, "\n")
+}
+
+cat("RESULTADO FINAL:\n")
+cat("Se necesitaron", iteracion, "iteraciones.\n")
+cat("El primer número mayor a", limite, "es:", fib[length(fib)], "\n")
+cat("Serie completa generada:\n")
+print(fib)
+```
+
+## Ejercicio 1.7 Ordenacion de un vector por método burbuja
+
+```{r}
+library(microbenchmark)
+
+burbuja <- function(x){
+  n <- length(x)
+  for(j in 1:(n-1)) {
+    for(i in 1:(n-j)){
+      if(x[i] > x[i+1]){
+        temp <- x[i]
+        x[i] <- x[i+1]
+        x[i+1] <- temp
+      }
+    }
+  }
+  return(x)
+}
+
+# Generar la muestra de tamaño 20,000 
+set.seed(2026)
+muestra_grande <- sample(1:100000, 20000)
+
+# Medir performance
+res_comparativo <- microbenchmark(
+  "Burbuja (Manual)" = burbuja(muestra_grande),
+  "Sort (Nativo R)" = sort(muestra_grande),
+  times = 1 
+)
+# Mostrar resultados
+cat("\n Resultados con n = 20,000 \n")
+print(res_comparativo)
+```
+
+## Ejercicio 1.8: La penitencia de Newton
+
+```{r}
+library(tictoc)
+
+# Definimos el límite de la suma (diez mil millones)
+n_objetivo <- 1e10 
+
+cat("Iniciando Comparativa para n =", n_objetivo, "\n\n")
+
+
+# MÉTODO 1: Algoritmo de Sumas Parciales (Bucle For)
+
+
+tic("Tiempo del Bucle")
+suma_bucle <- 0
+for(i in 1:n_objetivo) {
+  suma_bucle <- suma_bucle + i
+}
+toc()
+
+
+
+# MÉTODO 2: Algoritmo de la Función Matemática (Gauss)
+
+cat("\n2. Ejecutando Fórmula Matemática (con el n real = 1e10)...\n")
+
+tic("Tiempo de la Fórmula")
+# Usamos la fórmula: (n * (n + 1)) / 2
+suma_formula <- (n_objetivo * (n_objetivo + 1)) / 2
+toc()
+
+
+# RESULTADOS FINALES
+
+cat("Resultado final de la suma de Newton:", suma_formula, "\n")
+cat("Conclusión: El benchmarking nos permite entender la calidad 
+del algoritmo y la eficiencia según el recurso físico.\n")
+```
+
+# Cuarta sección:Benchmarking de Algoritmos y Medioides (kmeans)
+
+## Comparativa métodos de ordenamiento "burbuja" y sort nativo de R .
+
+```{r ordenamiento_violin, message=FALSE, warning=FALSE}
+library(microbenchmark)
+library(ggplot2)
+
+# 1. Definimos la función de ordenamiento burbuja
+burbuja <- function(x){
+  n <- length(x)
+  for(j in 1:(n-1)) {
+    for(i in 1:(n-j)){
+      if(x[i] > x[i+1]){
+        temp <- x[i]; x[i] <- x[i+1]; x[i+1] <- temp
+      }
+    }
+  }
+  return(x)
+}
+
+# 2. Generamos una muestra de 500 números (más ágil)
+set.seed(123)
+datos_v <- sample(1:10000, 500)
+
+# 3. Medimos la performance (20 repeticiones)
+bm_ordenacion <- microbenchmark(
+  "Burbuja" = burbuja(datos_v),
+  "Sort Nativo" = sort(datos_v),
+  times = 20
+)
+
+# 4. Creamos el gráfico y usamos PRINT para forzar su aparición
+p1 <- autoplot(bm_ordenacion) + 
+  labs(title = "Distribución de Tiempos: Burbuja vs Sort",
+       subtitle = "Gráfico de Violín (n=500)",
+       x = "Algoritmo", y = "Tiempo") +
+  theme_minimal()
+
+print(p1)
+```
+
+### Conclusión: Comparativa de Ordenamiento
+
+Como se observa en el gráfico de violín anterior, el método **Sort Nativo** de R es órdenes de magnitud más eficiente que el algoritmo de **Burbuja**. Mientras que el Sort nativo opera en microsegundos con una variabilidad casi nula, el bucle manual de Burbuja requiere un tiempo significativamente mayor debido a su complejidad algorítmica $O(n^2)$ y al procesamiento línea por línea en R. Esto demuestra la importancia de utilizar funciones vectorizadas y nativas para el manejo de grandes volúmenes de datos.
+
+## Análisis de Performance K-means
+
+### Introducción Teórica
+
+El algoritmo **K-means** es un método de aprendizaje no supervisado utilizado para el agrupamiento (*clustering*). Su objetivo es particionar un conjunto de $n$ observaciones en $k$ grupos distintos. El algoritmo funciona de manera iterativa: 1. Se inicializan $k$ centroides de forma aleatoria. 2. Cada punto se asigna al centroide más cercano (basado en la distancia euclídea). 3. Se recalculan los centroides promediando la posición de todos los puntos asignados a cada grupo. 4. El proceso se repite hasta que las asignaciones no cambian o se alcanza un límite de iteraciones.
+
+La eficiencia del método es alta, pero su tiempo de ejecución se ve afectado por el número de dimensiones de los datos y, fundamentalmente, por la cantidad de clusters ($k$) definidos.
+
+## Medición de Performance con Gráfico de Violín
+
+```{r kmeans_performance, message=FALSE, warning=FALSE}
+library(microbenchmark)
+library(ggplot2)
+
+# 1. Simulamos un dataset de 5.000 puntos en 2 dimensiones
+set.seed(42)
+datos_km <- matrix(rnorm(10000), ncol = 2)
+
+# 2. Medimos el tiempo para encontrar 3, 5 y 10 clusters
+# Realizamos 50 repeticiones para obtener una distribución robusta
+bm_kmeans <- microbenchmark(
+  "k=3" = kmeans(datos_km, centers = 3),
+  "k=5" = kmeans(datos_km, centers = 5),
+  "k=10" = kmeans(datos_km, centers = 10),
+  times = 50
+)
+
+# 3. Generación del gráfico de violín
+p_km <- autoplot(bm_kmeans) +
+  labs(title = "Performance de Agrupamiento K-means",
+       subtitle = "Comparación por número de clusters (k)",
+       x = "Cantidad de Grupos (k)", y = "Tiempo de ejecución") +
+  theme_light()
+
+# 4. Forzar visualización en el PDF
+print(p_km)
+```
+
+## Conclusión K-means
+
+El gráfico resultante permite observar cómo el tiempo de ejecución se incrementa a medida que aumentamos el valor de $k$. Esto se debe a que el algoritmo debe realizar una mayor cantidad de cálculos de distancia entre cada punto y los centroides en cada una de las iteraciones del proceso.
+
+## Comparativa Global de Algoritmos
+
+En esta sección final, comparamos el rendimiento de tres procesos distintos: el ordenamiento manual (**Burbuja**), el ordenamiento optimizado (**Sort Nativo**) y un proceso de inteligencia artificial no supervisada (**K-means**). El objetivo es observar cómo la eficiencia del código impacta más que la complejidad de la tarea en sí.
+
+```{r comparativa_global, message=FALSE, warning=FALSE}
+library(microbenchmark)
+library(ggplot2)
+
+# Preparación de datos
+set.seed(123)
+datos_vec <- sample(1:5000, 500)
+datos_mat <- matrix(rnorm(1000), ncol = 2)
+
+# Ejecución del benchmark
+comparativa_total <- microbenchmark(
+  "Burbuja (Manual)" = burbuja(datos_vec),
+  "Sort Nativo (R)" = sort(datos_vec),
+  "K-means (Agrupamiento)" = kmeans(datos_mat, centers = 3),
+  times = 30
+)
+
+# Renderizado del gráfico
+p_final <- autoplot(comparativa_total) +
+  labs(title = "Comparativa: Ordenamiento vs Agrupamiento",
+       subtitle = "Análisis de tiempos de ejecución (n=500)",
+       x = "Algoritmo", y = "Tiempo (Escala Logarítmica)") +
+  theme_minimal()
+
+print(p_final)
+```
+
+## Conclusión Final
+
+A partir de los experimentos realizados en este módulo, se desprenden tres conclusiones fundamentales:
+
+1.  **La eficiencia del lenguaje nativo:** El método `sort` de R es el más rápido por amplio margen. Esto confirma que las funciones internas de R, escritas en lenguajes de bajo nivel (C/Fortran), están altamente optimizadas para el procesamiento de datos.
+2.  **El costo de la ineficiencia:** El algoritmo de **Burbuja**, a pesar de realizar una tarea más simple que el agrupamiento, resulta ser el más lento de los tres. Esto demuestra que un algoritmo mal diseñado ($O(n^2)$) puede ser menos eficiente que un proceso de IA complejo pero bien implementado.
+3.  **Complejidad vs. Rendimiento:** El método **K-means** se sitúa en un punto intermedio. Aunque realiza cálculos matemáticos avanzados para encontrar centroides, su implementación nativa en R permite que procese grandes volúmenes de datos en un tiempo razonable, superando significativamente a los bucles `for` manuales.
+
+En definitiva, para el desarrollo de herramientas modernas, es imperativo priorizar funciones vectorizadas y algoritmos optimizados sobre implementaciones manuales iterativas.

@@ -1,0 +1,82 @@
+---
+title: "Ejercicio 2"
+author: "Avogadro Toast"
+date: "2026-04-15"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Consigna Ejercicio 2
+
+Calcular la suma de todos los valores de un vector aleatorio
+
+```{r}
+# 1. Creamos el vector del 1 al 1000000
+Vector <- 1:1000000
+
+# 2. Inicializamos la variable que guardará la suma
+Total <- 0
+Valor_Final <- length(Vector)
+
+# 3. Estructura de control: Bucle For
+for(i in 1:Valor_Final) {
+  Total <- Total + i
+}
+
+# 4. Resultado final
+print(paste("El resultado final de la suma es:", Total))
+```
+
+
+## Análisis del Algoritmo
+
+¿Qué sucede dentro del código?
+
+* **Vector <- 1:1000000**: Aquí R reserva un bloque de memoria.
+* **Total <- 0**: Actualiza el estado de la suma parcial en cada iteración.
+* **i**: Representa el valor del elemento actual del vector en la iteración presente.
+* **for**: Gestiona la repetición automática de la operación aritmética hasta agotar los elementos del objeto de entrada.
+* **Total <- Total + i**: Actualiza el valor del acumulador sumando el estado previo con el valor del índice actual. Es la línea de acción. La computadora tiene que sumarle el valor actual de i. Y se reescribe el nuevo resultado en el casillero de Total.
+
+## Ejemplo de comparación: Bucle For vs. Sum
+
+R está diseñado para tratar a los vectores como una sola unidad, por lo que usar funciones integradas como sum() es muchísimo más rápido que usar un bucle for, donde la computadora tiene que procesar cada número uno por uno.
+
+## Comparación
+
+```{r}
+n <- 1000000
+Vector <- 1:n
+# Medimos el tiempo del Bucle For
+inicio_for <- Sys.time()
+total_for <- 0
+for(i in 1:n) {
+  total_for <- total_for + i
+}
+final_for <- Sys.time()
+tiempo_for <- final_for - inicio_for
+# Mostramos los resultados
+cat("Resultado Final:", total_for, "\n")
+cat("Tiempo con Bucle For:", tiempo_for, "segundos\n")
+```
+
+## Comparación
+
+```{r}
+# Medimos el tiempo del Comando Sum()
+inicio_sum <- Sys.time()
+total_sum <- sum(as.numeric(Vector))
+final_sum <- Sys.time()
+tiempo_sum <- final_sum - inicio_sum
+
+# Resultados
+cat("Tiempo con Comando sum():", tiempo_sum, "segundos\n")
+```
+
+
+## Conclusión
+
+El uso de bucles nos permite automatizar tareas repetitivas. Aunque existen formas más rápidas en R (como la función sum(Vector) o la fórmula de Gauss), entender el bucle for es esencial para desarrollar algoritmos personalizados y más complejos en el futuro.

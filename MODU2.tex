@@ -1,0 +1,1039 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.21 of 2022/01/12
+%
+\documentclass[]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts will be used to generate the final print and online PDFs,
+% so please use T1 fonts in your manuscript whenever possible.
+% Other font encondings may result in incorrect characters.
+
+% Pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following two lines
+% to display URLs in blue roman font according to Springer's eBook style:
+\usepackage{hyperref}
+\usepackage{color}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+
+\begin{document}
+
+
+\title{Avogadro Toast: Módulo 2}
+%
+\titlerunning{Avogadro Toast}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Pilar Mujica\inst{} \and Lucia Salamone\inst{} \and Rocio
+Martinez\inst{} \and Sara Kemelmajer\inst{} \and Caterina
+Dinnocenzo\inst{} \and Lucas Segura\inst{}}
+
+
+\authorrunning{}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+
+\institute{Universidad Nacional de Cuyo, Mendoza CP
+5502\url{https://uncuyo.edu.ar}}
+
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+Este módulo establece los primeros pasos de programación en R-Cran
+utilizando la plantilla LNCS de Springer.
+
+\keywords{Programming Language \and R-Cran \and R Markdown}
+
+\end{abstract}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =} \ConstantTok{TRUE}\NormalTok{,}
+  \AttributeTok{fig.align =} \StringTok{"center"}\NormalTok{,  }\CommentTok{\# Centra todas las figuras automáticamente}
+  \AttributeTok{out.width =} \StringTok{"100\%"}\NormalTok{,    }\CommentTok{\# Fuerza a que no excedan el ancho del margen}
+  \AttributeTok{out.extra =} \StringTok{""}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Primera sección: Aprender a usar
+R}\label{primera-secciuxf3n-aprender-a-usar-r}
+
+\subsection{Primeros comandos de R}\label{primeros-comandos-de-r}
+
+R es un lenguaje muy similiar a mathlab y permite el trabajo con
+matrices.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OtherTok{=}\DecValTok{38}
+\NormalTok{a}\OtherTok{=}\DecValTok{40}
+\NormalTok{b}\OtherTok{=}\DecValTok{60}
+\NormalTok{c}\OtherTok{=}\NormalTok{b}\SpecialCharTok{{-}}\NormalTok{a}
+\NormalTok{c}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}\OtherTok{=}\DecValTok{40}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\DecValTok{30}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Uso de datasets o base de datos intenrnos de
+R}\label{uso-de-datasets-o-base-de-datos-intenrnos-de-r}
+
+Usando el comando data en la consola obtenemos distintos datos ya
+cargados en la base de datos de R, estos datos estan dados en tablas de
+las cuales podemos elegir columnas especificas si escribimos \$ despues
+de el comando de informacion especifico y elegimos la columna de datos
+deseada
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+\end{verbatim}
+
+\subsection{Comando Plot}\label{comando-plot}
+
+Es un comando que permite graficar cualquier fuente de datos que le
+asignemos, teniendo tambien la posibilidad de asignar nombre a las
+variables o hacer cambios en el grafico. En caso de duda de como
+utilizar el comndo podemos escribir ?plot en la consola, lo cual abrira
+una ventana que explicara en detalle el comando.
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/pressure-1} \end{center}
+
+\subsection{Funciones estadisticas}\label{funciones-estadisticas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z1}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{350}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{z1  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 14.869709 17.176748 31.398674 12.219307 35.781707 18.191972 26.226232
+##   [8]  8.842567 19.852754 26.837502 23.014415 14.616823 24.338227 33.741390
+##  [15] 31.306725 19.185761 38.844539 23.225456 18.535380 20.219015 23.367987
+##  [22] 29.700249 16.059933 16.207776 18.610110 28.225355 29.542884 20.925455
+##  [29] 18.978983 21.570079 26.568830 15.083871 30.434946 25.617287 17.579929
+##  [36] 18.609600 27.291859 20.912664 14.149468 21.734309 18.436251 13.087311
+##  [43] 17.173862 21.326057 12.350349  9.648447 19.321107 24.196007 13.941752
+##  [50] 26.182258 30.143420 23.634409 19.843211 21.400522 17.291891 17.689455
+##  [57] 23.380145 21.186730 18.888939 27.018771 17.944192 24.447431 23.354285
+##  [64] 17.817575 21.353012 23.179265 22.796296 13.553477 18.678027 26.221552
+##  [71] 25.433474 26.323494 27.344848 21.553197 23.665232 21.025889 15.881205
+##  [78] 17.113323 16.794791 22.153511 27.791424 21.826044 17.819292 14.560854
+##  [85] 17.853218 12.060554 25.446140 25.111368 31.877280 27.887969 21.753427
+##  [92] 36.635553 12.266422 14.535487 19.624533 20.856725 25.105277 26.410022
+##  [99] 18.575829 22.657032 21.431538 30.175395 20.200572 18.889073 17.110853
+## [106] 19.154950 13.313982 21.926596 29.697938 22.193303 34.625562 22.128102
+## [113] 20.933124 22.755643 25.477493 26.534082 25.688005 29.679363 23.492216
+## [120] 11.703958 22.369851 21.677557 27.183174 23.810560 23.400357 16.934597
+## [127] 30.403788 17.747123 21.377355 20.557193 25.428134 19.657257 26.152886
+## [134] 16.253024 18.691144 23.195482 19.298177 27.445965 26.667549 14.760673
+## [141] 36.512364 16.979055 19.254721 21.579197 23.057703 23.458180 19.809138
+## [148] 24.765810 17.872766 17.900018 25.510157 14.166749 26.717047 14.427257
+## [155] 29.211678 19.292485 23.556491 20.373480 18.231434 20.828226 17.961592
+## [162] 19.243448 19.056655 27.645839 16.056224 25.283055 14.361399 21.019292
+## [169] 16.333194 15.385684 33.250311 22.841185 27.535608 18.311151 28.595543
+## [176]  8.131578 19.302222 20.671707 25.147711 23.837058 26.559019 20.655619
+## [183] 24.561398 29.354027 29.337868 31.327722 16.899888 23.402326 12.406239
+## [190] 19.952202 14.913146 24.330332 26.773736 25.874183 20.980734 30.783302
+## [197] 22.116482 23.335505 23.211461 19.073460 22.999634 27.728687 29.992320
+## [204] 20.622146 26.067404 21.566825 16.455126 16.954588 22.085043 17.392988
+## [211] 20.895942 17.656509 25.711419 24.903764 17.123762 14.991087 15.472448
+## [218] 19.245634 18.150204 24.175335 24.924610 18.849718 14.572404 27.419161
+## [225] 23.827504 18.468362 24.179927 16.522449 24.394932 21.958457 25.111348
+## [232] 18.162264 24.104816 23.315921 21.252580 22.527378 26.924219 22.324687
+## [239] 21.364793 28.601255 19.616090 19.807225 25.439998 24.563399 24.086383
+## [246] 27.255045 19.222965 23.485903 29.531203 24.985053 23.616232 14.042474
+## [253] 29.943428 22.328097 23.337975 32.863016 22.056249 10.173638 24.926270
+## [260] 28.076139 24.703798 25.055248 28.740719 23.553111 20.597666 23.509793
+## [267] 19.027147 21.149020 20.679928 24.171033 26.024539 24.992670 16.429331
+## [274] 20.552313 27.374339 22.853690 12.155994 17.460000 22.141388 16.849612
+## [281] 22.589150 11.663523 23.891934 26.675157 22.380820 21.281907 18.822746
+## [288] 17.461976 23.863150 23.462338 27.212313 26.274969 22.763719 19.409040
+## [295] 19.599704 24.659452 26.383301  9.784899 19.223561 15.531245 32.109426
+## [302] 18.195991 16.032550 22.524469 24.163786 18.745837 16.163438 23.962964
+## [309] 20.247371 20.334095 27.100109 12.167419 23.492411 22.616175 25.800198
+## [316] 25.801510 29.063873 30.446990 22.109407 21.583466 14.622309 19.981871
+## [323] 24.450737 24.862728 26.622279 27.042578 22.423698 24.248789 23.901921
+## [330] 18.718148 18.596697 22.606192 15.341725 18.972506 20.206710 16.455779
+## [337] 21.938247 21.236114 20.549438 23.577413 22.531706 20.531304 30.261243
+## [344] 12.505062 19.078753 19.689392 16.872426 31.772603 10.459199 17.687669
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(z1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w1}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(z1)}
+\NormalTok{w1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 350
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1}\OtherTok{\textless{}{-}}\NormalTok{(}\DecValTok{501}\SpecialCharTok{:}\DecValTok{850}\NormalTok{)}
+\NormalTok{x1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 501 502 503 504 505 506 507 508 509 510 511 512 513 514 515 516 517 518
+##  [19] 519 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536
+##  [37] 537 538 539 540 541 542 543 544 545 546 547 548 549 550 551 552 553 554
+##  [55] 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572
+##  [73] 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590
+##  [91] 591 592 593 594 595 596 597 598 599 600 601 602 603 604 605 606 607 608
+## [109] 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626
+## [127] 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644
+## [145] 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 660 661 662
+## [163] 663 664 665 666 667 668 669 670 671 672 673 674 675 676 677 678 679 680
+## [181] 681 682 683 684 685 686 687 688 689 690 691 692 693 694 695 696 697 698
+## [199] 699 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716
+## [217] 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732 733 734
+## [235] 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 752
+## [253] 753 754 755 756 757 758 759 760 761 762 763 764 765 766 767 768 769 770
+## [271] 771 772 773 774 775 776 777 778 779 780 781 782 783 784 785 786 787 788
+## [289] 789 790 791 792 793 794 795 796 797 798 799 800 801 802 803 804 805 806
+## [307] 807 808 809 810 811 812 813 814 815 816 817 818 819 820 821 822 823 824
+## [325] 825 826 827 828 829 830 831 832 833 834 835 836 837 838 839 840 841 842
+## [343] 843 844 845 846 847 848 849 850
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(z1,x1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/unnamed-chunk-4-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(z1,}\AttributeTok{main=}\StringTok{"Histograma de Edades"}\NormalTok{,}\AttributeTok{breaks=}\DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(z1,}\AttributeTok{type=}\StringTok{"d"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: In density.default(z1, type = "d") :
+##  extra argument 'type' will be disregarded
+\end{verbatim}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+\section{Segunda sección: Ejercicios en
+clase:}\label{segunda-secciuxf3n-ejercicios-en-clase}
+
+\subsection{Ejercicio 1 de Algoritmos}\label{ejercicio-1-de-algoritmos}
+
+consigna: las ultimas 3 cifras del DNI son 195, consigna: crear una
+variable que tenga sus numeros
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DNI}\OtherTok{\textless{}{-}}\DecValTok{195}
+\end{Highlighting}
+\end{Shaded}
+
+Consigna: Crear un vector que tenga todos los numeros enteros desde el 1
+al 195.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Secuencia\_dni}\OtherTok{\textless{}{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{195}\NormalTok{)}
+\NormalTok{Secuencia\_dni}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+##  [19]  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36
+##  [37]  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54
+##  [55]  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
+##  [73]  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90
+##  [91]  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107 108
+## [109] 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126
+## [127] 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144
+## [145] 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162
+## [163] 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180
+## [181] 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195
+\end{verbatim}
+
+\subsection{Ejercicio 2: Calcular la suma de todos los valores del
+vector
+secuencia\_dni}\label{ejercicio-2-calcular-la-suma-de-todos-los-valores-del-vector-secuencia_dni}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Total}\OtherTok{\textless{}{-}}\DecValTok{0}
+\NormalTok{Valor\_Final}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(Secuencia\_dni)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Valor\_Final) \{}
+\NormalTok{  Total}\OtherTok{\textless{}{-}}\NormalTok{Total}\SpecialCharTok{+}\NormalTok{i}
+\NormalTok{  Total\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Ejercicio 3}\label{ejercicio-3}
+
+Repetir el ejercicio anterior pero en Python
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{secuencia\_dni }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{196}\NormalTok{)}
+\NormalTok{suma }\OperatorTok{=} \BuiltInTok{sum}\NormalTok{(secuencia\_dni)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"La suma total es: }\SpecialCharTok{\{}\NormalTok{suma}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## La suma total es: 19110
+\end{verbatim}
+
+\subsection{Ejercicio 4}\label{ejercicio-4}
+
+¿Cuanto tarda en correr el codigo del ejercicio 2?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Inicio}\OtherTok{\textless{}{-}}\FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{Total}\OtherTok{\textless{}{-}}\DecValTok{0}
+\NormalTok{Valor\_Final}\OtherTok{\textless{}{-}}\DecValTok{1000000}\SpecialCharTok{*}\FunctionTok{length}\NormalTok{(Secuencia\_dni)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Valor\_Final) \{}
+\NormalTok{  Total}\OtherTok{\textless{}{-}}\NormalTok{Total}\SpecialCharTok{+}\NormalTok{i}
+\NormalTok{  Total\}}
+
+\NormalTok{Final}\OtherTok{\textless{}{-}}\FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{Final}\SpecialCharTok{{-}}\NormalTok{Inicio}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Time difference of 3.707734 secs
+\end{verbatim}
+
+\subsection{Ejercicio 5}\label{ejercicio-5}
+
+Repetir ejercicio anterior utilizando la cabeza de Gauss
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{195}
+\NormalTok{suma\_gauss }\OtherTok{\textless{}{-}}\NormalTok{ (n }\SpecialCharTok{*}\NormalTok{ (n }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{2}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"La suma usando la fórmula de Gauss es:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "La suma usando la fórmula de Gauss es:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{suma\_gauss}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19110
+\end{verbatim}
+
+\section{Tercera sección: Ejercicios del
+PDF:}\label{tercera-secciuxf3n-ejercicios-del-pdf}
+
+\subsection{1.4 Generar un vector
+secuencia}\label{generar-un-vector-secuencia}
+
+\subsubsection{Método 1: Uso de bucle `for' (anidamiento
+clásico)}\label{muxe9todo-1-uso-de-bucle-for-anidamiento-cluxe1sico}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tiempo\_for }\OtherTok{\textless{}{-}} \FunctionTok{system.time}\NormalTok{(\{}
+\NormalTok{  A }\OtherTok{\textless{}{-}} \FunctionTok{numeric}\NormalTok{(}\DecValTok{50000}\NormalTok{) }\CommentTok{\# Pre{-}asignar espacio es una buena práctica en R}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50000}\NormalTok{) \{ }
+\NormalTok{    A[i] }\OtherTok{\textless{}{-}}\NormalTok{ (i }\SpecialCharTok{*} \DecValTok{2}\NormalTok{) }
+\NormalTok{  \}}
+\NormalTok{\})}
+\CommentTok{\# Mostrar extremos del vector resultante}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Extremo Inicial (head):"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Extremo Inicial (head):"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(A))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  2  4  6  8 10 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Extremo Final (tail):"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Extremo Final (tail):"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{tail}\NormalTok{(A))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  99990  99992  99994  99996  99998 100000
+\end{verbatim}
+
+\subsubsection{Método 2: Uso del comando nativo de R
+`seq'}\label{muxe9todo-2-uso-del-comando-nativo-de-r-seq}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tiempo\_seq }\OtherTok{\textless{}{-}} \FunctionTok{system.time}\NormalTok{(\{}
+\NormalTok{  B }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{2}\NormalTok{, }\AttributeTok{to =} \DecValTok{100000}\NormalTok{, }\AttributeTok{by =} \DecValTok{2}\NormalTok{)}
+\NormalTok{\})}
+\CommentTok{\# Mostrar extremos del vector resultante}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Extremo Inicial (head):"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Extremo Inicial (head):"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(B))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  2  4  6  8 10 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Extremo Final (tail):"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Extremo Final (tail):"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{tail}\NormalTok{(B))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  99990  99992  99994  99996  99998 100000
+\end{verbatim}
+
+\subsubsection{Comparativa de
+Performance}\label{comparativa-de-performance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Performance del bucle FOR:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Performance del bucle FOR:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(tiempo\_for)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##   0.005   0.000   0.004
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Performance del comando SEQ:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Performance del comando SEQ:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(tiempo\_seq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    user  system elapsed 
+##   0.001   0.000   0.000
+\end{verbatim}
+
+\subsection{Ejercicio 1.5 e 1.6 Implementación de
+Fibonacci}\label{ejercicio-1.5-e-1.6-implementaciuxf3n-de-fibonacci}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Inicializamos el vector con los dos primeros términos}
+\NormalTok{fib }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{limite }\OtherTok{\textless{}{-}} \DecValTok{1000000}
+\NormalTok{iteracion }\OtherTok{\textless{}{-}} \DecValTok{2} \CommentTok{\# Ya tenemos los dos primeros elementos}
+
+\CommentTok{\# Bucle para generar la serie hasta superar el millón}
+\ControlFlowTok{while}\NormalTok{ (fib[}\FunctionTok{length}\NormalTok{(fib)] }\SpecialCharTok{\textless{}=}\NormalTok{ limite) \{}
+\CommentTok{\# El nuevo término es la suma de los dos anteriores}
+\NormalTok{  nuevo\_termino }\OtherTok{\textless{}{-}}\NormalTok{ fib[}\FunctionTok{length}\NormalTok{(fib)] }\SpecialCharTok{+}\NormalTok{ fib[}\FunctionTok{length}\NormalTok{(fib) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{]}
+  
+\NormalTok{  fib }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(fib, nuevo\_termino)}
+  
+\NormalTok{  iteracion }\OtherTok{\textless{}{-}}\NormalTok{ iteracion }\SpecialCharTok{+} \DecValTok{1}
+  
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Iteración:"}\NormalTok{, iteracion, }\StringTok{" {-} Valor generado:"}\NormalTok{, nuevo\_termino, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Iteración: 3  - Valor generado: 1 
+## Iteración: 4  - Valor generado: 2 
+## Iteración: 5  - Valor generado: 3 
+## Iteración: 6  - Valor generado: 5 
+## Iteración: 7  - Valor generado: 8 
+## Iteración: 8  - Valor generado: 13 
+## Iteración: 9  - Valor generado: 21 
+## Iteración: 10  - Valor generado: 34 
+## Iteración: 11  - Valor generado: 55 
+## Iteración: 12  - Valor generado: 89 
+## Iteración: 13  - Valor generado: 144 
+## Iteración: 14  - Valor generado: 233 
+## Iteración: 15  - Valor generado: 377 
+## Iteración: 16  - Valor generado: 610 
+## Iteración: 17  - Valor generado: 987 
+## Iteración: 18  - Valor generado: 1597 
+## Iteración: 19  - Valor generado: 2584 
+## Iteración: 20  - Valor generado: 4181 
+## Iteración: 21  - Valor generado: 6765 
+## Iteración: 22  - Valor generado: 10946 
+## Iteración: 23  - Valor generado: 17711 
+## Iteración: 24  - Valor generado: 28657 
+## Iteración: 25  - Valor generado: 46368 
+## Iteración: 26  - Valor generado: 75025 
+## Iteración: 27  - Valor generado: 121393 
+## Iteración: 28  - Valor generado: 196418 
+## Iteración: 29  - Valor generado: 317811 
+## Iteración: 30  - Valor generado: 514229 
+## Iteración: 31  - Valor generado: 832040 
+## Iteración: 32  - Valor generado: 1346269
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"RESULTADO FINAL:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## RESULTADO FINAL:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Se necesitaron"}\NormalTok{, iteracion, }\StringTok{"iteraciones.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Se necesitaron 32 iteraciones.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"El primer número mayor a"}\NormalTok{, limite, }\StringTok{"es:"}\NormalTok{, fib[}\FunctionTok{length}\NormalTok{(fib)], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## El primer número mayor a 1e+06 es: 1346269
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Serie completa generada:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Serie completa generada:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(fib)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]       0       1       1       2       3       5       8      13      21
+## [10]      34      55      89     144     233     377     610     987    1597
+## [19]    2584    4181    6765   10946   17711   28657   46368   75025  121393
+## [28]  196418  317811  514229  832040 1346269
+\end{verbatim}
+
+\subsection{Ejercicio 1.7 Ordenacion de un vector por método
+burbuja}\label{ejercicio-1.7-ordenacion-de-un-vector-por-muxe9todo-burbuja}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(microbenchmark)}
+
+\NormalTok{burbuja }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{)) \{}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n}\SpecialCharTok{{-}}\NormalTok{j))\{}
+      \ControlFlowTok{if}\NormalTok{(x[i] }\SpecialCharTok{\textgreater{}}\NormalTok{ x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{])\{}
+\NormalTok{        temp }\OtherTok{\textless{}{-}}\NormalTok{ x[i]}
+\NormalTok{        x[i] }\OtherTok{\textless{}{-}}\NormalTok{ x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{        x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+\CommentTok{\# Generar la muestra de tamaño 20,000 }
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2026}\NormalTok{)}
+\NormalTok{muestra\_grande }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100000}\NormalTok{, }\DecValTok{20000}\NormalTok{)}
+
+\CommentTok{\# Medir performance}
+\NormalTok{res\_comparativo }\OtherTok{\textless{}{-}} \FunctionTok{microbenchmark}\NormalTok{(}
+  \StringTok{"Burbuja (Manual)"} \OtherTok{=} \FunctionTok{burbuja}\NormalTok{(muestra\_grande),}
+  \StringTok{"Sort (Nativo R)"} \OtherTok{=} \FunctionTok{sort}\NormalTok{(muestra\_grande),}
+  \AttributeTok{times =} \DecValTok{1} 
+\NormalTok{)}
+\CommentTok{\# Mostrar resultados}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{ Resultados con n = 20,000 }\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Resultados con n = 20,000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(res\_comparativo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Unit: microseconds
+##              expr          min           lq         mean       median
+##  Burbuja (Manual) 21099765.778 21099765.778 21099765.778 21099765.778
+##   Sort (Nativo R)      863.941      863.941      863.941      863.941
+##            uq          max neval
+##  21099765.778 21099765.778     1
+##       863.941      863.941     1
+\end{verbatim}
+
+\subsection{Ejercicio 1.8: La penitencia de
+Newton}\label{ejercicio-1.8-la-penitencia-de-newton}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tictoc)}
+
+\CommentTok{\# Definimos el límite de la suma (diez mil millones)}
+\NormalTok{n\_objetivo }\OtherTok{\textless{}{-}} \FloatTok{1e10} 
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Iniciando Comparativa para n ="}\NormalTok{, n\_objetivo, }\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Iniciando Comparativa para n = 1e+10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# MÉTODO 1: Algoritmo de Sumas Parciales (Bucle For)}
+
+
+\FunctionTok{tic}\NormalTok{(}\StringTok{"Tiempo del Bucle"}\NormalTok{)}
+\NormalTok{suma\_bucle }\OtherTok{\textless{}{-}} \DecValTok{0}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_objetivo) \{}
+\NormalTok{  suma\_bucle }\OtherTok{\textless{}{-}}\NormalTok{ suma\_bucle }\SpecialCharTok{+}\NormalTok{ i}
+\NormalTok{\}}
+\FunctionTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tiempo del Bucle: 179.257 sec elapsed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# MÉTODO 2: Algoritmo de la Función Matemática (Gauss)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{2. Ejecutando Fórmula Matemática (con el n real = 1e10)...}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 2. Ejecutando Fórmula Matemática (con el n real = 1e10)...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tic}\NormalTok{(}\StringTok{"Tiempo de la Fórmula"}\NormalTok{)}
+\CommentTok{\# Usamos la fórmula: (n * (n + 1)) / 2}
+\NormalTok{suma\_formula }\OtherTok{\textless{}{-}}\NormalTok{ (n\_objetivo }\SpecialCharTok{*}\NormalTok{ (n\_objetivo }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{2}
+\FunctionTok{toc}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Tiempo de la Fórmula: 0.001 sec elapsed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# RESULTADOS FINALES}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Resultado final de la suma de Newton:"}\NormalTok{, suma\_formula, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Resultado final de la suma de Newton: 5e+19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Conclusión: El benchmarking nos permite entender la calidad }
+\StringTok{del algoritmo y la eficiencia según el recurso físico.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Conclusión: El benchmarking nos permite entender la calidad 
+## del algoritmo y la eficiencia según el recurso físico.
+\end{verbatim}
+
+\section{Cuarta sección:Benchmarking de Algoritmos y Medioides
+(kmeans)}\label{cuarta-secciuxf3nbenchmarking-de-algoritmos-y-medioides-kmeans}
+
+\subsection{Comparativa métodos de ordenamiento ``burbuja'' y sort
+nativo de R
+.}\label{comparativa-muxe9todos-de-ordenamiento-burbuja-y-sort-nativo-de-r-.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(microbenchmark)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# 1. Definimos la función de ordenamiento burbuja}
+\NormalTok{burbuja }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{)) \{}
+    \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(n}\SpecialCharTok{{-}}\NormalTok{j))\{}
+      \ControlFlowTok{if}\NormalTok{(x[i] }\SpecialCharTok{\textgreater{}}\NormalTok{ x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{])\{}
+\NormalTok{        temp }\OtherTok{\textless{}{-}}\NormalTok{ x[i]; x[i] }\OtherTok{\textless{}{-}}\NormalTok{ x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]; x[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ temp}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+\CommentTok{\# 2. Generamos una muestra de 500 números (más ágil)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{datos\_v }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10000}\NormalTok{, }\DecValTok{500}\NormalTok{)}
+
+\CommentTok{\# 3. Medimos la performance (20 repeticiones)}
+\NormalTok{bm\_ordenacion }\OtherTok{\textless{}{-}} \FunctionTok{microbenchmark}\NormalTok{(}
+  \StringTok{"Burbuja"} \OtherTok{=} \FunctionTok{burbuja}\NormalTok{(datos\_v),}
+  \StringTok{"Sort Nativo"} \OtherTok{=} \FunctionTok{sort}\NormalTok{(datos\_v),}
+  \AttributeTok{times =} \DecValTok{20}
+\NormalTok{)}
+
+\CommentTok{\# 4. Creamos el gráfico y usamos PRINT para forzar su aparición}
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{autoplot}\NormalTok{(bm\_ordenacion) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribución de Tiempos: Burbuja vs Sort"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Gráfico de Violín (n=500)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Algoritmo"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tiempo"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(p1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/ordenamiento_violin-1} \end{center}
+
+\subsubsection{Conclusión: Comparativa de
+Ordenamiento}\label{conclusiuxf3n-comparativa-de-ordenamiento}
+
+Como se observa en el gráfico de violín anterior, el método \textbf{Sort
+Nativo} de R es órdenes de magnitud más eficiente que el algoritmo de
+\textbf{Burbuja}. Mientras que el Sort nativo opera en microsegundos con
+una variabilidad casi nula, el bucle manual de Burbuja requiere un
+tiempo significativamente mayor debido a su complejidad algorítmica
+\(O(n^2)\) y al procesamiento línea por línea en R. Esto demuestra la
+importancia de utilizar funciones vectorizadas y nativas para el manejo
+de grandes volúmenes de datos.
+
+\subsection{Análisis de Performance
+K-means}\label{anuxe1lisis-de-performance-k-means}
+
+\subsubsection{Introducción Teórica}\label{introducciuxf3n-teuxf3rica}
+
+El algoritmo \textbf{K-means} es un método de aprendizaje no supervisado
+utilizado para el agrupamiento (\emph{clustering}). Su objetivo es
+particionar un conjunto de \(n\) observaciones en \(k\) grupos
+distintos. El algoritmo funciona de manera iterativa: 1. Se inicializan
+\(k\) centroides de forma aleatoria. 2. Cada punto se asigna al
+centroide más cercano (basado en la distancia euclídea). 3. Se
+recalculan los centroides promediando la posición de todos los puntos
+asignados a cada grupo. 4. El proceso se repite hasta que las
+asignaciones no cambian o se alcanza un límite de iteraciones.
+
+La eficiencia del método es alta, pero su tiempo de ejecución se ve
+afectado por el número de dimensiones de los datos y, fundamentalmente,
+por la cantidad de clusters (\(k\)) definidos.
+
+\subsection{Medición de Performance con Gráfico de
+Violín}\label{mediciuxf3n-de-performance-con-gruxe1fico-de-violuxedn}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(microbenchmark)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# 1. Simulamos un dataset de 5.000 puntos en 2 dimensiones}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{datos\_km }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10000}\NormalTok{), }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# 2. Medimos el tiempo para encontrar 3, 5 y 10 clusters}
+\CommentTok{\# Realizamos 50 repeticiones para obtener una distribución robusta}
+\NormalTok{bm\_kmeans }\OtherTok{\textless{}{-}} \FunctionTok{microbenchmark}\NormalTok{(}
+  \StringTok{"k=3"} \OtherTok{=} \FunctionTok{kmeans}\NormalTok{(datos\_km, }\AttributeTok{centers =} \DecValTok{3}\NormalTok{),}
+  \StringTok{"k=5"} \OtherTok{=} \FunctionTok{kmeans}\NormalTok{(datos\_km, }\AttributeTok{centers =} \DecValTok{5}\NormalTok{),}
+  \StringTok{"k=10"} \OtherTok{=} \FunctionTok{kmeans}\NormalTok{(datos\_km, }\AttributeTok{centers =} \DecValTok{10}\NormalTok{),}
+  \AttributeTok{times =} \DecValTok{50}
+\NormalTok{)}
+
+\CommentTok{\# 3. Generación del gráfico de violín}
+\NormalTok{p\_km }\OtherTok{\textless{}{-}} \FunctionTok{autoplot}\NormalTok{(bm\_kmeans) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Performance de Agrupamiento K{-}means"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Comparación por número de clusters (k)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Cantidad de Grupos (k)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tiempo de ejecución"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_light}\NormalTok{()}
+
+\CommentTok{\# 4. Forzar visualización en el PDF}
+\FunctionTok{print}\NormalTok{(p\_km)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/kmeans_performance-1} \end{center}
+
+\subsection{Conclusión K-means}\label{conclusiuxf3n-k-means}
+
+El gráfico resultante permite observar cómo el tiempo de ejecución se
+incrementa a medida que aumentamos el valor de \(k\). Esto se debe a que
+el algoritmo debe realizar una mayor cantidad de cálculos de distancia
+entre cada punto y los centroides en cada una de las iteraciones del
+proceso.
+
+\subsection{Comparativa Global de
+Algoritmos}\label{comparativa-global-de-algoritmos}
+
+En esta sección final, comparamos el rendimiento de tres procesos
+distintos: el ordenamiento manual (\textbf{Burbuja}), el ordenamiento
+optimizado (\textbf{Sort Nativo}) y un proceso de inteligencia
+artificial no supervisada (\textbf{K-means}). El objetivo es observar
+cómo la eficiencia del código impacta más que la complejidad de la tarea
+en sí.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(microbenchmark)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Preparación de datos}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{datos\_vec }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5000}\NormalTok{, }\DecValTok{500}\NormalTok{)}
+\NormalTok{datos\_mat }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{), }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# Ejecución del benchmark}
+\NormalTok{comparativa\_total }\OtherTok{\textless{}{-}} \FunctionTok{microbenchmark}\NormalTok{(}
+  \StringTok{"Burbuja (Manual)"} \OtherTok{=} \FunctionTok{burbuja}\NormalTok{(datos\_vec),}
+  \StringTok{"Sort Nativo (R)"} \OtherTok{=} \FunctionTok{sort}\NormalTok{(datos\_vec),}
+  \StringTok{"K{-}means (Agrupamiento)"} \OtherTok{=} \FunctionTok{kmeans}\NormalTok{(datos\_mat, }\AttributeTok{centers =} \DecValTok{3}\NormalTok{),}
+  \AttributeTok{times =} \DecValTok{30}
+\NormalTok{)}
+
+\CommentTok{\# Renderizado del gráfico}
+\NormalTok{p\_final }\OtherTok{\textless{}{-}} \FunctionTok{autoplot}\NormalTok{(comparativa\_total) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Comparativa: Ordenamiento vs Agrupamiento"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Análisis de tiempos de ejecución (n=500)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Algoritmo"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Tiempo (Escala Logarítmica)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(p\_final)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth,]{MODU2_files/figure-latex/comparativa_global-1} \end{center}
+
+\subsection{Conclusión Final}\label{conclusiuxf3n-final}
+
+A partir de los experimentos realizados en este módulo, se desprenden
+tres conclusiones fundamentales:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{La eficiencia del lenguaje nativo:} El método \texttt{sort} de
+  R es el más rápido por amplio margen. Esto confirma que las funciones
+  internas de R, escritas en lenguajes de bajo nivel (C/Fortran), están
+  altamente optimizadas para el procesamiento de datos.
+\item
+  \textbf{El costo de la ineficiencia:} El algoritmo de
+  \textbf{Burbuja}, a pesar de realizar una tarea más simple que el
+  agrupamiento, resulta ser el más lento de los tres. Esto demuestra que
+  un algoritmo mal diseñado (\(O(n^2)\)) puede ser menos eficiente que
+  un proceso de IA complejo pero bien implementado.
+\item
+  \textbf{Complejidad vs.~Rendimiento:} El método \textbf{K-means} se
+  sitúa en un punto intermedio. Aunque realiza cálculos matemáticos
+  avanzados para encontrar centroides, su implementación nativa en R
+  permite que procese grandes volúmenes de datos en un tiempo razonable,
+  superando significativamente a los bucles \texttt{for} manuales.
+\end{enumerate}
+
+En definitiva, para el desarrollo de herramientas modernas, es
+imperativo priorizar funciones vectorizadas y algoritmos optimizados
+sobre implementaciones manuales iterativas.
+
+%
+% ---- Bibliography ----
+
+
+
+\end{document}

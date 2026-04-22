@@ -1,0 +1,92 @@
+install.packages("rmarkdown")
+a=38
+a=40
+b=60
+c=b-a
+c
+knitr::opts_chunk$set(echo = TRUE)
+a=38
+a=40
+b=60
+c=b-a
+c
+a=38
+a=40
+b=60
+c=b-a
+c
+data()
+AirPassengers
+cars
+cars$speed
+?plot
+plot(pressure)
+plot(pressure,main="Presión del gas ideal")
+plot(pressure, main="Presión del gas ideal", ylab="hPa",xlab="K")
+rnorm(35,12,5)
+rnorm(35)
+plot(z1)
+z1<-rnorm(350,22,5)
+z1
+z1<-rnorm(350,22,5)
+z1
+z1<-rnorm(350,22,5)
+z1
+plot(z1)
+w1<-length(z1)
+w1
+plot(z1)
+lenght(x1)
+plot(z1,x1)
+plot(z1)
+w1<-length(z1)
+w1
+x1<-(501:850)
+x1
+plot(z1,x1)
+plot(z1)
+w1<-length(z1)
+w1
+x1<-(501:850)
+x1
+plot(z1,x1)
+hist(z1,main="Histograma de Edades")
+hist(z1,main="Histograma de Edades",breaks=2)
+hist(z1,main="Histograma de Edades",breaks=50)
+plot(density(z1))
+plot(density(z1,type="d"))
+plot(pressure,type="b", main="Presion del gas ideal", ylab="hPa", xlab="K")
+?plot
+plot(pressure,type="s", main="Presion del gas ideal", ylab="hPa", xlab="K")
+plot(pressure,type="s", main="Presion del gas ideal", ylab="hPa", xlab="K")
+plot(pressure,type="s", main="Presion del gas ideal", ylab="hPa", xlab="K")
+install.packages("rticles")
+knitr::opts_chunk$set(echo = TRUE)
+DNI<-195
+for i=1;195
+for(v in 1;195)
+for(v in 1:195), print(5:i)
+for(v in 1:195) print(1:i)
+for(v in 1:195) print(1:v)
+Secuencia_dni<-(1:195)
+Secuencia_dni<-(1:195)
+Secuencia_dni
+Secuencia_dni<-(1:195)
+Secuencia_dni
+Total<-0
+Valor_Final<-length(Secuencia_dni)
+for(i in 1:Valor_Final) {
+Total<-Total+i
+Total}
+reticulate::repl_python()
+Total<-0
+Valor_Final<-length(Secuencia_dni)
+for(i in 1:Valor_Final) {
+Total<-Total+i
+Total}
+Total<-0
+Valor_Final<-length(Secuencia_dni)
+for(i in 1:Valor_Final) {
+Total<-Total+i
+Total}
+reticulate::repl_python()
